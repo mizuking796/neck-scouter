@@ -21,9 +21,6 @@ function FaceCombatSection({ faceCombatData, calibrationData }) {
       <h3 className="face-combat-title scouter-text">
         闘争的フェイス特徴
       </h3>
-      <p className="face-combat-disclaimer">
-        ※エンターテインメント目的の参考指標です
-      </p>
 
       <div className="face-combat-content">
         {/* 左側：顔のランドマーク表示 */}
