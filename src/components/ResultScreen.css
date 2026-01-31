@@ -22,7 +22,7 @@
 }
 
 .result-title {
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 4px;
   opacity: 0.8;
   margin: 0;
@@ -34,7 +34,7 @@
 }
 
 .combat-power-value {
-  font-size: clamp(40px, 10vw, 52px);
+  font-size: clamp(46px, 12vw, 60px);
   font-weight: bold;
   letter-spacing: 2px;
   animation: powerGlow 2s infinite;
@@ -88,23 +88,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border: 1px solid var(--scouter-green-dim);
   background: rgba(0, 255, 65, 0.05);
 }
 
 .main-score-label {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--scouter-green-dim);
   white-space: nowrap;
 }
 
 .main-score-value {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   color: var(--scouter-green);
   font-family: 'Courier New', monospace;
-  min-width: 32px;
+  min-width: 36px;
   text-align: right;
 }
 
@@ -116,14 +116,14 @@
 }
 
 .one-line-comment p {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--scouter-green);
   margin: 0;
 }
 
 /* 注意書き */
 .first-view-disclaimer {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--scouter-green-dim);
   text-align: center;
   opacity: 0.6;
@@ -431,12 +431,12 @@
   }
 
   .result-title {
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 2px;
   }
 
   .combat-power-value {
-    font-size: 28px;
+    font-size: 34px;
   }
 
   .main-content-row {
@@ -453,15 +453,15 @@
   }
 
   .main-score-item {
-    padding: 4px 6px;
+    padding: 5px 8px;
   }
 
   .main-score-label {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .main-score-value {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .one-line-comment {
@@ -469,11 +469,11 @@
   }
 
   .one-line-comment p {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .first-view-disclaimer {
-    font-size: 8px;
+    font-size: 9px;
   }
 }
 
@@ -486,17 +486,17 @@
   }
 
   .result-title {
-    font-size: 18px;
+    font-size: 22px;
     letter-spacing: 4px;
   }
 
   .combat-power-value {
-    font-size: 56px;
+    font-size: 64px;
   }
 
   .main-content-row {
     gap: 24px;
-    max-width: 480px;
+    max-width: 500px;
   }
 
   .polygon-wrapper {
@@ -509,15 +509,15 @@
   }
 
   .main-score-item {
-    padding: 8px 14px;
+    padding: 10px 16px;
   }
 
   .main-score-label {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .main-score-value {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .one-line-comment {
@@ -525,11 +525,11 @@
   }
 
   .one-line-comment p {
-    font-size: 16px;
+    font-size: 19px;
   }
 
   .first-view-disclaimer {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .second-view {
@@ -559,16 +559,16 @@
   }
 
   .result-title {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .combat-power-value {
-    font-size: 72px;
+    font-size: 80px;
   }
 
   .main-content-row {
     gap: 40px;
-    max-width: 600px;
+    max-width: 650px;
   }
 
   .polygon-wrapper {
@@ -577,19 +577,19 @@
   }
 
   .main-score-item {
-    padding: 10px 16px;
+    padding: 12px 20px;
   }
 
   .main-score-label {
-    font-size: 13px;
+    font-size: 17px;
   }
 
   .main-score-value {
-    font-size: 20px;
+    font-size: 28px;
   }
 
   .one-line-comment p {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .second-view,
