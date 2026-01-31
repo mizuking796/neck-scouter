@@ -22,7 +22,8 @@ export const STATIC_NECK_GAMMA = 1.2
 
 // 左右バランス補正用ガンマ値
 // γ > 1 → スコアを抑える（高くなりすぎ対策）
-export const BALANCE_GAMMA = 1.3
+// γ = 2.0: raw 95 → 90, raw 99 → 98（Sは100点のみ）
+export const BALANCE_GAMMA = 2.0
 
 // ============================================================
 // 戦闘力スケーリングパラメータ
