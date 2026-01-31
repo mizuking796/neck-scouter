@@ -22,7 +22,7 @@
 }
 
 .result-title {
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 4px;
   opacity: 0.8;
   margin: 0;
@@ -34,7 +34,7 @@
 }
 
 .combat-power-value {
-  font-size: clamp(46px, 12vw, 60px);
+  font-size: clamp(52px, 14vw, 72px);
   font-weight: bold;
   letter-spacing: 2px;
   animation: powerGlow 2s infinite;
@@ -94,17 +94,17 @@
 }
 
 .main-score-label {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--scouter-green-dim);
   white-space: nowrap;
 }
 
 .main-score-value {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: bold;
   color: var(--scouter-green);
   font-family: 'Courier New', monospace;
-  min-width: 36px;
+  min-width: 40px;
   text-align: right;
 }
 
@@ -116,14 +116,14 @@
 }
 
 .one-line-comment p {
-  font-size: 17px;
+  font-size: 20px;
   color: var(--scouter-green);
   margin: 0;
 }
 
 /* 注意書き */
 .first-view-disclaimer {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--scouter-green-dim);
   text-align: center;
   opacity: 0.6;
@@ -431,12 +431,12 @@
   }
 
   .result-title {
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 2px;
   }
 
   .combat-power-value {
-    font-size: 34px;
+    font-size: 40px;
   }
 
   .main-content-row {
@@ -457,11 +457,11 @@
   }
 
   .main-score-label {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .main-score-value {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .one-line-comment {
@@ -469,11 +469,11 @@
   }
 
   .one-line-comment p {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .first-view-disclaimer {
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 
@@ -486,17 +486,17 @@
   }
 
   .result-title {
-    font-size: 22px;
+    font-size: 26px;
     letter-spacing: 4px;
   }
 
   .combat-power-value {
-    font-size: 64px;
+    font-size: 72px;
   }
 
   .main-content-row {
     gap: 24px;
-    max-width: 500px;
+    max-width: 520px;
   }
 
   .polygon-wrapper {
@@ -513,11 +513,11 @@
   }
 
   .main-score-label {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .main-score-value {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .one-line-comment {
@@ -525,11 +525,11 @@
   }
 
   .one-line-comment p {
-    font-size: 19px;
+    font-size: 22px;
   }
 
   .first-view-disclaimer {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .second-view {
@@ -559,16 +559,16 @@
   }
 
   .result-title {
-    font-size: 26px;
+    font-size: 30px;
   }
 
   .combat-power-value {
-    font-size: 80px;
+    font-size: 90px;
   }
 
   .main-content-row {
     gap: 40px;
-    max-width: 650px;
+    max-width: 700px;
   }
 
   .polygon-wrapper {
@@ -577,19 +577,19 @@
   }
 
   .main-score-item {
-    padding: 12px 20px;
+    padding: 14px 24px;
   }
 
   .main-score-label {
-    font-size: 17px;
+    font-size: 20px;
   }
 
   .main-score-value {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .one-line-comment p {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .second-view,
