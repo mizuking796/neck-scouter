@@ -45,6 +45,11 @@ export function useFaceTracking(videoRef, canvasRef, onResults) {
     let actualAspectRatio = 4 / 3
     if (videoRef.current && videoRef.current.videoWidth > 0 && videoRef.current.videoHeight > 0) {
       actualAspectRatio = videoRef.current.videoWidth / videoRef.current.videoHeight
+      // 初回のみログ出力
+      if (!window._aspectRatioLogged) {
+        console.log('Video dimensions:', videoRef.current.videoWidth, 'x', videoRef.current.videoHeight, '→ aspectRatio:', actualAspectRatio.toFixed(3))
+        window._aspectRatioLogged = true
+      }
     }
 
     // キャンバスをクリア＆状態リセット

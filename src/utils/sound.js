@@ -20,21 +20,18 @@ export async function initAudio() {
 
     // より確実なウォームアップ: 実際に聞こえるビープを複数回再生
     // 最初の音声は遅延しやすいため、ここで消費する
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       const oscillator = audioContext.createOscillator()
       const gainNode = audioContext.createGain()
-      // 非常に小さい音量で実際のビープ音を再生（オーディオパイプラインを確実にアクティブに）
+      // 非常に小さい音量で実際のビープ音を再生
       gainNode.gain.value = 0.01
       oscillator.frequency.value = 440
       oscillator.type = 'square'
       oscillator.connect(gainNode)
       gainNode.connect(audioContext.destination)
-      oscillator.start(audioContext.currentTime + i * 0.05)
-      oscillator.stop(audioContext.currentTime + i * 0.05 + 0.02)
+      oscillator.start(audioContext.currentTime + i * 0.02)
+      oscillator.stop(audioContext.currentTime + i * 0.02 + 0.01)
     }
-
-    // 少し待ってからウォームアップ完了
-    await new Promise(resolve => setTimeout(resolve, 300))
 
     isWarmedUp = true
     console.log('Audio warmup complete')
@@ -75,24 +72,10 @@ export async function warmupAudio() {
 }
 
 // OK音を再生（スカウター風のピピッ音）
-export async function playOkSound() {
-  console.log('playOkSound called, audioContext:', audioContext?.state)
-
-  if (!audioContext) {
-    console.warn('Audio not initialized, trying to init now')
-    await initAudio()
-    if (!audioContext) return
-  }
-
-  // suspended状態なら必ずresumeを待つ
-  if (audioContext.state === 'suspended') {
-    try {
-      await audioContext.resume()
-      console.log('AudioContext resumed before playing')
-    } catch (e) {
-      console.error('Failed to resume AudioContext:', e)
-      return
-    }
+export function playOkSound() {
+  if (!audioContext || audioContext.state !== 'running') {
+    console.warn('Audio not ready, skipping sound')
+    return
   }
 
   try {
@@ -102,8 +85,6 @@ export async function playOkSound() {
     playBeep(now, 1200, 0.1)
     // ピッ（さらに高音）
     playBeep(now + 0.12, 1500, 0.15)
-
-    console.log('Sound played at', now)
   } catch (e) {
     console.error('Failed to play sound:', e)
   }

@@ -31,10 +31,10 @@ export function calculateFWHR(landmarks, aspectRatio = 4/3) {
   // 平均値を使用
   const avgFWHR = fwhrHistory.reduce((a, b) => a + b, 0) / fwhrHistory.length
 
-  // fWHRは通常1.4〜2.4程度（幅を広げて0点を防ぐ）
-  // 高いほど高スコア（1.4 → 0, 2.4 → 100）
+  // fWHRは通常1.7〜2.1程度（人間の平均的な範囲）
+  // 高いほど高スコア（1.5 → 0, 2.1 → 100）
   // 最低5点を保証
-  const rawScore = normalizeScore(avgFWHR, 1.4, 2.4)
+  const rawScore = normalizeScore(avgFWHR, 1.5, 2.1)
   const score = Math.max(5, rawScore)
 
   return {
@@ -88,11 +88,18 @@ function extractFWHR(landmarks, aspectRatio) {
 
   // アスペクト比補正: x座標はwidth基準、y座標はheight基準なので
   // 実際の比率 = (x_norm * width) / (y_norm * height) = (x_norm / y_norm) * aspectRatio
-  const fwhr = (cheekboneWidth / faceHeight) * aspectRatio
+  const rawRatio = cheekboneWidth / faceHeight
+  const fwhr = rawRatio * aspectRatio
 
-  // デバッグ出力（初回のみ）
-  if (fwhrHistory.length === 0) {
-    console.log('fWHR計算:', { cheekboneWidth, faceHeight, aspectRatio, fwhr })
+  // デバッグ出力（毎回、ただし控えめに）
+  if (fwhrHistory.length % 10 === 0) {
+    console.log('fWHR:', {
+      cheekboneWidth: cheekboneWidth.toFixed(4),
+      faceHeight: faceHeight.toFixed(4),
+      rawRatio: rawRatio.toFixed(3),
+      aspectRatio: aspectRatio.toFixed(3),
+      fwhr: fwhr.toFixed(3)
+    })
   }
 
   return fwhr
