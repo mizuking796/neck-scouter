@@ -24,7 +24,7 @@
 }
 
 .version {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--scouter-green-dim);
   margin-top: -16px;
 }
@@ -32,10 +32,11 @@
 .description {
   padding: 20px 30px;
   line-height: 1.8;
+  font-size: 18px;
 }
 
 .description .highlight {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   margin: 8px 0;
   text-shadow:
@@ -48,17 +49,17 @@
 }
 
 .method-label {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--scouter-green-dim);
   margin-bottom: 8px;
 }
 
 .method .scouter-text {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .terms-notice {
-  font-size: 11px;
+  font-size: 15px;
   color: var(--scouter-green-dim);
 }
 
@@ -69,31 +70,50 @@
 
 .details-link {
   margin-top: 4px;
+  font-size: 16px;
 }
 
 .notice {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--scouter-green-dim);
   line-height: 1.6;
 }
 
 .start-content .scouter-button {
   margin-top: 16px;
-  font-size: 24px;
-  padding: 16px 48px;
+  font-size: 28px;
+  padding: 18px 56px;
 }
 
 /* モバイル対応 */
 @media (max-width: 600px) {
   .description {
     padding: 16px 20px;
+    font-size: 16px;
   }
 
   .description .highlight {
-    font-size: 20px;
+    font-size: 26px;
+  }
+
+  .method-label {
+    font-size: 16px;
   }
 
   .method .scouter-text {
-    font-size: 16px;
+    font-size: 20px;
+  }
+
+  .terms-notice {
+    font-size: 14px;
+  }
+
+  .notice {
+    font-size: 14px;
+  }
+
+  .start-content .scouter-button {
+    font-size: 24px;
+    padding: 16px 48px;
   }
 }
