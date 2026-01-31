@@ -34,11 +34,16 @@ export function useFaceTracking(videoRef, canvasRef, onResults) {
 
   // 結果を処理する関数
   const processResults = useCallback((results) => {
-    if (!canvasRef.current) return
+    if (!canvasRef.current || !videoRef.current) return
 
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     const { width, height } = canvas
+
+    // 実際のビデオフレームの解像度を取得（MediaPipeのランドマークはこの解像度基準）
+    const videoWidth = videoRef.current.videoWidth || width
+    const videoHeight = videoRef.current.videoHeight || height
+    const actualAspectRatio = videoWidth / videoHeight
 
     // キャンバスをクリア＆状態リセット
     ctx.clearRect(0, 0, width, height)
@@ -68,7 +73,7 @@ export function useFaceTracking(videoRef, canvasRef, onResults) {
           landmarks,
           angles,
           faceData,
-          aspectRatio: width / height, // デバイス間の計算補正用
+          aspectRatio: actualAspectRatio, // 実際のビデオ解像度からのアスペクト比
           timestamp: Date.now()
         })
       }

@@ -11,7 +11,7 @@ let cheekboneHistory = []
 /**
  * 頬骨特徴を計算
  * @param {Array} landmarks - 468個のランドマーク
- * @param {number} aspectRatio - キャンバスのアスペクト比（未使用だが一貫性のため受け取る）
+ * @param {number} aspectRatio - ビデオフレームのアスペクト比（width/height）
  * @returns {Object} - { score, rank, details }
  */
 export function calculateCheekbone(landmarks, aspectRatio = 4/3) {
@@ -19,8 +19,8 @@ export function calculateCheekbone(landmarks, aspectRatio = 4/3) {
     return { score: 50, rank: 'B', details: {} }
   }
 
-  // 頬骨特徴を抽出
-  const cheekboneFeatures = extractCheekboneFeatures(landmarks)
+  // 頬骨特徴を抽出（アスペクト比補正付き）
+  const cheekboneFeatures = extractCheekboneFeatures(landmarks, aspectRatio)
 
   // 履歴に追加
   cheekboneHistory.push(cheekboneFeatures)
@@ -54,31 +54,33 @@ export function calculateCheekbone(landmarks, aspectRatio = 4/3) {
 }
 
 /**
- * 頬骨特徴を抽出
+ * 頬骨特徴を抽出（アスペクト比補正付き）
+ * @param {Array} landmarks - ランドマーク
+ * @param {number} aspectRatio - ビデオフレームのアスペクト比（width/height）
  */
-function extractCheekboneFeatures(landmarks) {
+function extractCheekboneFeatures(landmarks, aspectRatio) {
   // 頬骨の位置
   const leftZygo = landmarks[LANDMARKS.ZYGOMATIC_LEFT]
   const rightZygo = landmarks[LANDMARKS.ZYGOMATIC_RIGHT]
 
-  // 頬骨の幅
-  const zygoWidth = Math.abs(rightZygo.x - leftZygo.x)
+  // 頬骨の幅（アスペクト比補正: x座標にaspectRatioを掛けて実際の比率に）
+  const zygoWidth = Math.abs(rightZygo.x - leftZygo.x) * aspectRatio
 
   // 顎幅
   const jawLeft = landmarks[LANDMARKS.JAW_LEFT]
   const jawRight = landmarks[LANDMARKS.JAW_RIGHT]
-  const jawWidth = Math.abs(jawRight.x - jawLeft.x)
+  const jawWidth = Math.abs(jawRight.x - jawLeft.x) * aspectRatio
 
   // 頬の位置（頬骨と顎の間）
   const leftCheek = landmarks[LANDMARKS.LEFT_CHEEK]
   const rightCheek = landmarks[LANDMARKS.RIGHT_CHEEK]
-  const cheekWidth = Math.abs(rightCheek.x - leftCheek.x)
+  const cheekWidth = Math.abs(rightCheek.x - leftCheek.x) * aspectRatio
 
   // 突出度 = 頬骨幅が顎幅と頬幅の平均よりどれだけ大きいか
   const avgLowerFaceWidth = (jawWidth + cheekWidth) / 2
   const prominence = (zygoWidth - avgLowerFaceWidth)
 
-  // 頬骨の高さ位置（顔全体における相対位置）
+  // 頬骨の高さ位置（顔全体における相対位置）- Y座標は補正不要
   const forehead = landmarks[LANDMARKS.FOREHEAD]
   const chin = landmarks[LANDMARKS.CHIN]
   const faceHeight = Math.abs(chin.y - forehead.y)
