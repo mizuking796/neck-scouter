@@ -51,15 +51,17 @@ export async function warmupAudio() {
     }
   }
 
-  // 無音のビープでウォームアップ
+  // 極小音量でビープを再生（完全無音だとブラウザがスキップする可能性あり）
   try {
     const oscillator = audioContext.createOscillator()
     const gainNode = audioContext.createGain()
-    gainNode.gain.value = 0
+    // 人間にはほぼ聞こえない極小音量
+    gainNode.gain.value = 0.001
+    oscillator.frequency.value = 1 // 1Hz（聞こえない超低周波）
     oscillator.connect(gainNode)
     gainNode.connect(audioContext.destination)
     oscillator.start()
-    oscillator.stop(audioContext.currentTime + 0.001)
+    oscillator.stop(audioContext.currentTime + 0.05) // 少し長めに
   } catch (e) {
     console.error('Warmup failed:', e)
   }

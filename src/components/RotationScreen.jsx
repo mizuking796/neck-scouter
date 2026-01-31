@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { useFaceTracking } from '../hooks/useFaceTracking'
-import { playOkSound } from '../utils/sound'
+import { playOkSound, warmupAudio } from '../utils/sound'
 import {
   calculateAllFaceCombatFeatures,
   resetAllFaceCombatHistory,
@@ -84,6 +84,9 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
 
   // カウントダウン → 目の位置チェック
   useEffect(() => {
+    // 音声ウォームアップ（初回音声遅延対策）
+    warmupAudio()
+
     // refsもリセット
     measurementRef.current = {
       angleHistory: [],
@@ -106,6 +109,9 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
       resetAllFaceCombatHistory()
     }
 
+    // 1秒後に再度ウォームアップ（音声を確実に準備）
+    const warmupTimer = setTimeout(() => warmupAudio(), 1000)
+
     // 最初から2を表示（stateの初期値）
     // 1秒後に1を表示
     const t1 = setTimeout(() => setCountdown(1), 1000)
@@ -122,6 +128,7 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
     }, 2500)
 
     return () => {
+      clearTimeout(warmupTimer)
       clearTimeout(t1)
       clearTimeout(t2)
       clearTimeout(t3)
@@ -151,6 +158,9 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
 
   // 測定をリセットしてやり直す
   const resetMeasurement = useCallback((newBaseAngles) => {
+    // 音声ウォームアップ（次の成功音のため）
+    warmupAudio()
+
     measurementRef.current = {
       angleHistory: [],
       maxAngle: 0,
@@ -232,6 +242,8 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
         checkAlignmentRef.current = false
         if (isAligned) {
           // 既に目が合っている → READYをスキップして直接ROTATINGへ
+          // 音声ウォームアップ（成功音のため）
+          warmupAudio()
           calibrationDataRef.current = {
             ...calibrationDataRef.current,
             baseAngles: {
@@ -262,6 +274,8 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
 
         if (elapsed >= RECOVERY_STILL_DURATION) {
           // 準備完了！測定開始
+          // 音声ウォームアップ（成功音のため）
+          warmupAudio()
           // baseAnglesを更新して測定開始
           calibrationDataRef.current = {
             ...calibrationDataRef.current,
@@ -422,6 +436,11 @@ function RotationScreen({ direction, calibrationData, onComplete }) {
         const progress = Math.min((holdTime / STILL_DURATION) * 100, 100)
         setHoldProgress(progress)
         setMessage('そのまま！')
+
+        // 50%到達時に音声をウォームアップ（成功音の直前準備）
+        if (progress >= 50 && progress < 60) {
+          warmupAudio()
+        }
         setSubMessage(direction === 'up' ? '音が鳴ったら完了' : '音が鳴ったら正面に戻って')
         phaseRef.current = PHASE.HOLDING
         setDisplayPhase(PHASE.HOLDING)
