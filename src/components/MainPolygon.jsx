@@ -24,6 +24,9 @@ function MainPolygon({ smoothness, neckIndex, shoulderVolume, faceFeatures }) {
   }
 
   const chartOptions = {
+    layout: {
+      padding: 20
+    },
     scales: {
       r: {
         angleLines: {
@@ -35,10 +38,11 @@ function MainPolygon({ smoothness, neckIndex, shoulderVolume, faceFeatures }) {
         pointLabels: {
           color: 'rgba(0, 255, 65, 0.9)',
           font: {
-            family: 'Courier New',
-            size: 12,
+            family: 'sans-serif',
+            size: 11,
             weight: 'bold'
-          }
+          },
+          padding: 5
         },
         ticks: {
           color: 'rgba(0, 255, 65, 0.5)',

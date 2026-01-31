@@ -60,8 +60,8 @@
 
 .polygon-wrapper {
   flex-shrink: 0;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
 }
 
 .polygon-wrapper canvas {
