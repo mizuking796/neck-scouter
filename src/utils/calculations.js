@@ -163,7 +163,7 @@ export function calculateDynamicNeckIndex(calibrationData, upMeasurement) {
   return Math.round(Math.max(0, Math.min(100, score)))
 }
 
-// 左右バランス計算
+// 左右バランス計算（スムーズネス用 - 旧式、互換性のため残す）
 export function calculateBalance(rightScore, leftScore) {
   const diff = Math.abs(rightScore - leftScore)
 
@@ -175,6 +175,37 @@ export function calculateBalance(rightScore, leftScore) {
     score: Math.round(score),
     diff,
     dominant: rightScore > leftScore ? 'right' : rightScore < leftScore ? 'left' : 'balanced'
+  }
+}
+
+// 左右バランス計算（最大回旋角度ベース）
+export function calculateAngleBalance(rightAngle, leftAngle) {
+  const rightDeg = rightAngle || 0
+  const leftDeg = leftAngle || 0
+  const diff = Math.abs(rightDeg - leftDeg)
+
+  // 角度差に基づくスコア計算
+  // diff 0°: 100点
+  // diff 10°: 80点
+  // diff 30°: 40点
+  // diff 50°以上: 0点
+  let score
+  if (diff <= 5) {
+    score = 100 - diff // 95-100
+  } else if (diff <= 15) {
+    score = 95 - (diff - 5) * 2 // 75-95
+  } else if (diff <= 30) {
+    score = 75 - (diff - 15) * 1.67 // 50-75
+  } else if (diff <= 50) {
+    score = 50 - (diff - 30) * 2.5 // 0-50
+  } else {
+    score = 0
+  }
+
+  return {
+    score: Math.round(Math.max(0, Math.min(100, score))),
+    diff: Math.round(diff * 10) / 10,
+    dominant: rightDeg > leftDeg ? 'right' : rightDeg < leftDeg ? 'left' : 'balanced'
   }
 }
 

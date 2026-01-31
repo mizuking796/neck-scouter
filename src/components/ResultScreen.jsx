@@ -12,7 +12,7 @@ import {
   calculateSmoothness,
   calculateStaticNeckIndex,
   calculateDynamicNeckIndex,
-  calculateBalance,
+  calculateAngleBalance,
   getRank,
   getRankStaticNeck,
   getRankBalance,
@@ -211,8 +211,12 @@ function ResultScreen({ calibrationData, measurementData, faceCombatData, jujuts
   }, [scores])
 
   const balance = useMemo(() => {
-    return calculateBalance(scores.rightSmoothness, scores.leftSmoothness)
-  }, [scores])
+    // 最大回旋角度に基づいてバランスを計算
+    return calculateAngleBalance(
+      measurementData.right?.maxAngle,
+      measurementData.left?.maxAngle
+    )
+  }, [measurementData])
 
   const displayBalance = useMemo(() => {
     return {
