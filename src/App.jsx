@@ -72,6 +72,12 @@ function App() {
       {/* スキャンラインエフェクト */}
       <div className="scanline-overlay" />
 
+      {/* 横向き警告（モバイルのみ） */}
+      <div className="landscape-warning">
+        <div className="landscape-warning-icon">📱</div>
+        <p className="landscape-warning-text">縦向きにしてください</p>
+      </div>
+
       {phase === PHASES.START && (
         <StartScreen onStart={handleStart} />
       )}

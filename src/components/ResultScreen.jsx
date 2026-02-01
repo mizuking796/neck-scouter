@@ -488,25 +488,6 @@ function ResultScreen({ calibrationData, measurementData, faceCombatData, jujuts
           {/* 闘争的フェイス特徴 */}
           <FaceCombatSection faceCombatData={faceCombatData} calibrationData={calibrationData} />
 
-          {/* デバッグ情報（一時的） */}
-          {faceCombatData && (
-            <div className="debug-info" style={{
-              marginTop: '16px',
-              padding: '12px',
-              background: 'rgba(255,255,255,0.1)',
-              borderRadius: '4px',
-              fontSize: '12px',
-              fontFamily: 'monospace',
-              color: '#aaa'
-            }}>
-              <div>【デバッグ情報】コピーして送ってください</div>
-              <div>aspectRatio: {faceCombatData._debug?.aspectRatio || 'N/A'}</div>
-              <div>fWHR: {faceCombatData.fwhr?.details?.fwhr || 'N/A'}</div>
-              <div>jaw: {faceCombatData.jaw?.details?.jawAngle || 'N/A'}°</div>
-              <div>cheekbone: {faceCombatData.cheekbone?.details?.prominence || 'N/A'}</div>
-            </div>
-          )}
-
           {/* 免責事項 */}
           <div className="final-disclaimer">
             <p>

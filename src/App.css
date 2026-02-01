@@ -40,3 +40,45 @@
   animation: scanline 8s linear infinite;
 }
 
+/* 横向き警告オーバーレイ（モバイルのみ） */
+.landscape-warning {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--scouter-bg);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+
+.landscape-warning-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  animation: rotate-phone 2s ease-in-out infinite;
+}
+
+.landscape-warning-text {
+  color: var(--scouter-green);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@keyframes rotate-phone {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-20deg); }
+  75% { transform: rotate(20deg); }
+}
+
+/* モバイル横向きの時だけ表示 */
+@media (max-width: 900px) and (orientation: landscape) {
+  .landscape-warning {
+    display: flex;
+  }
+}
+
