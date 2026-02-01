@@ -44,6 +44,10 @@ export function calculateAllFaceCombatFeatures(landmarks, aspectRatio = 4/3) {
     total: {
       score: totalScore,
       rank: getRank(totalScore)
+    },
+    // デバッグ用
+    _debug: {
+      aspectRatio: aspectRatio.toFixed(3)
     }
   }
 }
