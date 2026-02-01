@@ -31,10 +31,10 @@ export function calculateFWHR(landmarks, aspectRatio = 4/3) {
   // 平均値を使用
   const avgFWHR = fwhrHistory.reduce((a, b) => a + b, 0) / fwhrHistory.length
 
-  // fWHRは通常1.7〜2.1程度（人間の平均的な範囲）
-  // 高いほど高スコア（1.5 → 0, 2.1 → 100）
+  // fWHRは実測値に基づく範囲（1.2〜1.8）
+  // 高いほど高スコア（1.2 → 0, 1.8 → 100）
   // 最低5点を保証
-  const rawScore = normalizeScore(avgFWHR, 1.5, 2.1)
+  const rawScore = normalizeScore(avgFWHR, 1.2, 1.8)
   const score = Math.max(5, rawScore)
 
   return {

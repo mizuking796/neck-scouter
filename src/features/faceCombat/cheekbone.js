@@ -54,27 +54,27 @@ export function calculateCheekbone(landmarks, aspectRatio = 4/3) {
 }
 
 /**
- * 頬骨特徴を抽出（アスペクト比補正付き）
+ * 頬骨特徴を抽出
  * @param {Array} landmarks - ランドマーク
- * @param {number} aspectRatio - ビデオフレームのアスペクト比（width/height）
+ * @param {number} aspectRatio - 未使用（幅同士の比較なので補正不要）
  */
 function extractCheekboneFeatures(landmarks, aspectRatio) {
   // 頬骨の位置
   const leftZygo = landmarks[LANDMARKS.ZYGOMATIC_LEFT]
   const rightZygo = landmarks[LANDMARKS.ZYGOMATIC_RIGHT]
 
-  // 頬骨の幅（アスペクト比補正: x座標にaspectRatioを掛けて実際の比率に）
-  const zygoWidth = Math.abs(rightZygo.x - leftZygo.x) * aspectRatio
+  // 頬骨の幅（正規化座標のまま - 幅同士の比較なので補正不要）
+  const zygoWidth = Math.abs(rightZygo.x - leftZygo.x)
 
   // 顎幅
   const jawLeft = landmarks[LANDMARKS.JAW_LEFT]
   const jawRight = landmarks[LANDMARKS.JAW_RIGHT]
-  const jawWidth = Math.abs(jawRight.x - jawLeft.x) * aspectRatio
+  const jawWidth = Math.abs(jawRight.x - jawLeft.x)
 
   // 頬の位置（頬骨と顎の間）
   const leftCheek = landmarks[LANDMARKS.LEFT_CHEEK]
   const rightCheek = landmarks[LANDMARKS.RIGHT_CHEEK]
-  const cheekWidth = Math.abs(rightCheek.x - leftCheek.x) * aspectRatio
+  const cheekWidth = Math.abs(rightCheek.x - leftCheek.x)
 
   // 突出度 = 頬骨幅が顎幅と頬幅の平均よりどれだけ大きいか
   const avgLowerFaceWidth = (jawWidth + cheekWidth) / 2
